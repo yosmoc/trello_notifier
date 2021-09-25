@@ -5,7 +5,7 @@ all: clean build
 
 .PHONY: clean
 clean:
-	rm -rf $(BIN)
+	rm -rf $(BIN) goxz
 
 .PHONY: build
 build:
@@ -14,3 +14,7 @@ build:
 .PHONY: install
 install:
 	go install .
+
+.PHONY: crossplatform
+crossplatform:
+	goxz -os=linux,darwin -n $(BIN) .

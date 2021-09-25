@@ -9,15 +9,17 @@ import (
 )
 
 func main() {
-	err := godotenv.Load(".env")
+	if _, err := os.Stat(".env"); err == nil {
+		err := godotenv.Load(".env")
 
-	if err != nil {
-		log.Fatalf("Error loading .env file.")
+		if err != nil {
+			log.Fatalf("Error loading .env file.")
+		}
 	}
 
-	client := trello.NewClient(os.Getenv("API_KEY"), os.Getenv("TOKEN"))
+	client := trello.NewClient(os.Getenv("TRELLO_API_KEY"), os.Getenv("TRELLO_TOKEN"))
 
-	listId := os.Getenv("LIST_ID")
+	listId := os.Getenv("TRELLO_LIST_ID")
 	list, err := client.GetList(listId)
 
 	if err != nil {

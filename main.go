@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"os"
-	"os/exec"
 
 	"github.com/adlio/trello"
 	"github.com/joho/godotenv"
@@ -32,9 +31,7 @@ func main() {
 	}
 
 	for _, card := range cards {
-		cmd := exec.Command("terminal-notifier", "-title", card.Name, "-message", card.URL)
-		err := cmd.Run()
-
+		err := notifier(card.Name, card.URL)
 		if err != nil {
 			log.Fatal(err)
 		}

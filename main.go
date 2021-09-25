@@ -32,10 +32,16 @@ func main() {
 		log.Fatalf("error getting cards")
 	}
 
-	for _, card := range cards {
-		err := notifier(card.Name, card.URL)
-		if err != nil {
-			log.Fatal(err)
+	if len(cards) > 0 {
+		for _, card := range cards {
+			if err := notifier(card.Name, card.URL); err != nil {
+				log.Fatal(err)
+			}
 		}
+		return
+	}
+
+	if err := notifier("No cards", "Please add a card for list: "+list.Name); err != nil {
+		log.Fatal(err)
 	}
 }

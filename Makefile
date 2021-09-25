@@ -10,3 +10,7 @@ clean:
 .PHONY: build
 build:
 	go build -o $(BIN)
+
+.PHONY: install
+install:
+	go install .
